@@ -1,9 +1,37 @@
 import React from 'react';
-import { render } from 'react-testing-library'
 import App from '../index';
 
-it('renders without crashing', () => {
-  const { container } = render(<App />)
+const state = {
+  app: {
+    images: {}
+  }
+};
 
-  expect(container).toMatchSnapshot()
+const actions = {
+  getImages: jest.fn(),
+  getImagesSuccess: jest.fn(),
+  getImagesFail: jest.fn(),
+};
+
+const props = {
+  images: state.app.images,
+};
+
+describe('<App />', () => {
+  describe('mapStateToProps', () => {
+    it('Map state to props', () => {
+      const { mapStateToProps } = require('../index');
+      const mappedProps = mapStateToProps(state);
+      expect(mappedProps).toEqual({ ...props });
+    });
+  });
+
+  describe('mapDispatchToProps', () => {
+    it('Should inject the dispatch for every action ', () => {
+      const { mapDispatchToProps } = require('../index');
+      const dispatch = jest.fn();
+      const result = mapDispatchToProps(dispatch);
+      expect(Object.keys(result.actions)).toEqual(Object.keys(actions));
+    });
+  });
 });

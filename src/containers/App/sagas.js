@@ -1,11 +1,14 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 
+import FlickrService from '../../api/flickrService';
 import * as ActionTypes from './constants';
 import * as appActions from './actions';
 
 export function* fetchImages(action: Action<string>): Saga<void> {
-  try {    
-    yield put(appActions.getImagesSuccess({image: ''}));
+  try {
+    const flickrService = new FlickrService();
+    const result = yield call(flickrService.getImages);
+    yield put(appActions.getImagesSuccess(result));
   } catch (err) {
     yield put(appActions.getImagesFail(err));
   }
@@ -16,5 +19,5 @@ export function* watchGetImages(): Saga<void> {
 }
 
 export const appSagas = [
-  watchGetImages
+  watchGetImages()
 ];

@@ -13,8 +13,9 @@ export function getImagesSuccess(images) {
   };
 }
 
-export function getImagesFail() {
+export function getImagesFail(error) {
   return {
-    type: ActionTypes.GET_IMAGES_FAIL
+    type: ActionTypes.GET_IMAGES_FAIL,
+    payload: error
   };
 }

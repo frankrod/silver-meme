@@ -1,13 +1,13 @@
 import * as ActionTypes from './constants';
 
 const initialState = {
-  images: []
+  images: {}
 };
 
 const appReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case ActionTypes.GET_IMAGES: {
+    case ActionTypes.GET_IMAGES_SUCCESS: {
       return { ...state, images: payload };
     }
     default:
