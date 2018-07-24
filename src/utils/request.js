@@ -10,7 +10,7 @@ function parseJSON(response) {
   );
 }
 
-export const apiURL = 'http://localhost:8000';
+export const apiURL = 'http://localhost:3000';
 
 export function request(url: string, options?: Object) {
   return new Promise((resolve, reject) => {
