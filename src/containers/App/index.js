@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Grid, Row, Col, Thumbnail } from 'react-bootstrap';
+import { pathOr } from 'ramda';
 
 import * as appActions from './actions';
-import logo from '../../images/logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -12,16 +13,24 @@ class App extends Component {
   }
 
   render() {
+    const { images } = this.props
+    console.log(images)
+
+    const photos = pathOr([], ['photos', 'photo'], images);
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Grid>
+        <h1>CSS3 LIGHTBOX</h1>
+        <h5>A simple CSS-only lightbox experiment</h5>
+        <Row>
+        {photos.map((img) => (
+        
+          <Col xs={6} md={2}>
+            <Thumbnail href="#" alt="171x180" src={img.url_m} />
+          </Col>
+        ))}
+        </Row>
+      </Grid>
     );
   }
 }
