@@ -1,7 +1,7 @@
 import * as ActionTypes from './constants';
 
 const initialState = {
-  images: {}
+  images: undefined
 };
 
 const appReducer = (state = initialState, action) => {

@@ -9,14 +9,14 @@ class FlickrService {
     };
   }
 
-  getImages() {
+  getImages(page) {
     return new Promise((resolve, reject) => {
       Flickr.tokenOnly(this.flickrOptions, (error, flickr) => {
           if(error) reject(error);
           flickr.photos.search({
               text:'red+panda',
               extras: 'url_m',
-              page: 1,
+              page: page,
               per_page: 10
           }, function(err, result) {
               if(err) reject(err);                

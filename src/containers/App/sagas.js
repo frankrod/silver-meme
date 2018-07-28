@@ -7,7 +7,7 @@ import * as appActions from './actions';
 export function* fetchImages(action: Action<string>): Saga<void> {
   try {
     const flickrService = new FlickrService();
-    const result = yield call(flickrService.getImages);
+    const result = yield call(flickrService.getImages, action.payload.pageNumber);
     yield put(appActions.getImagesSuccess(result));
   } catch (err) {
     yield put(appActions.getImagesFail(err));

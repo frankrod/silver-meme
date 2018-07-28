@@ -2,7 +2,7 @@ import * as actions from '../actions';
 import reducer from '../reducer';
 
 const initialState = {
-  images: {}
+  images: undefined
 };
 
 describe('App reducer', () => {

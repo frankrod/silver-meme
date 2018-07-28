@@ -1,8 +1,11 @@
 import * as ActionTypes from './constants';
 
-export function getImages() {
+export function getImages(pageNumber) {
   return {
-    type: ActionTypes.GET_IMAGES
+    type: ActionTypes.GET_IMAGES,
+    payload: {
+      pageNumber
+    }
   };
 }
 

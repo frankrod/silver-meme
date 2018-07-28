@@ -41,7 +41,7 @@ const provision = async () => {
       handler: async function(request,h) {
           const flickrService = new FlickrService();
 
-          return await flickrService.getImages();
+          return await flickrService.getImages(request.query.page);
       }
     });
 

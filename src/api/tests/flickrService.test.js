@@ -18,11 +18,12 @@ describe('flickr service', () => {
 
     window.fetch = mockedFetch;
 
+    const pageNumber = 1
     const flickrService = new FlickrService();
-
+    
     expect.assertions(2);
-    return flickrService.getImages().then((response) => {
-      expect(mockedFetch).toHaveBeenCalledWith(`${apiURL}/images`, undefined);
+    return flickrService.getImages(pageNumber).then((response) => {
+      expect(mockedFetch).toHaveBeenCalledWith(`${apiURL}/images?page=${pageNumber}`, undefined);
       expect(response).toEqual(responseJSON);
     });
   });

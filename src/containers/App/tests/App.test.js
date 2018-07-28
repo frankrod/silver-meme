@@ -1,9 +1,10 @@
 import React from 'react';
 import App from '../index';
+import { getTotalPages } from '../selector'
 
 const state = {
   app: {
-    images: {}
+    images: undefined
   }
 };
 
@@ -15,6 +16,7 @@ const actions = {
 
 const props = {
   images: state.app.images,
+  totalPages: getTotalPages(state.app)
 };
 
 describe('<App />', () => {

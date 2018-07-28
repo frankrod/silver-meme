@@ -5,9 +5,12 @@ describe('App actions', () => {
   it('should have a type of GET_IMAGES', () => {
     const expected = {
       type: ActionTypes.GET_IMAGES,
+      payload: {
+        pageNumber: 1
+      }
     }
 
-    expect(actions.getImages()).toEqual(expected);
+    expect(actions.getImages(1)).toEqual(expected);
   });
 
   it('should have a type of GET_IMAGES_SUCCESS', () => {

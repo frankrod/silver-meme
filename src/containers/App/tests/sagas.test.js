@@ -7,8 +7,12 @@ import { watchGetImages, fetchImages } from '../sagas';
 describe('fetchImages', () => {
   let fetchImagesGenerator;
 
+  const payload = {
+    pageNumber: 1
+  }
+
   beforeEach(() => {
-    fetchImagesGenerator = fetchImages()
+    fetchImagesGenerator = fetchImages({ payload })
     fetchImagesGenerator.next();
   });
 
