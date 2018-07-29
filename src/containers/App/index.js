@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { pathOr } from 'ramda';
-import { Grid, Row, Col, Thumbnail } from 'react-bootstrap';
+import { Grid, Row, Col, Image } from 'react-bootstrap';
 
 import { getTotalPages } from './selector';
-import { MyPagination } from '../../components/Pagination'
+import { MyPagination } from '../../components/Pagination';
+import { Modal } from '../../components/Modal'
 import * as appActions from './actions';
 import './App.css';
 
 class App extends Component {
   state = {
-    currentPage: 1
+    currentPage: 1,
+    didLoad: false,
+    showModal: false,
   }
 
   componentDidMount() {
@@ -24,9 +27,28 @@ class App extends Component {
     });
   }
 
+  handleLoad = () => {
+    this.setState({ didLoad: true })
+  }
+
+  handleClick = (img, event) => {
+    this.setState({
+      showModal: true,
+      imageSrc: img.url_m,
+      imageMessage: img.title
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      showModal: false,
+      imageSrc: ''
+    })
+  }
+
   render() {
     const { images, totalPages } = this.props;
-    const { currentPage } = this.state;
+    const { currentPage, showModal, imageSrc, imageMessage } = this.state;
 
     const photos = pathOr([], ['photos', 'photo'], images);
 
@@ -36,8 +58,8 @@ class App extends Component {
         <h5>A simple CSS-only lightbox experiment</h5>
         <Row>
         {photos.map((img) => (
-          <Col xs={6} md={2} key={img.id}>
-            <Thumbnail href="#" alt="171x180" src={img.url_m} />
+          <Col xs={12} md={3} key={img.id}>
+            <Image onClick={(e) => this.handleClick(img, e)} className="image" src={img.url_m} thumbnail responsive />
           </Col>
         ))}
         </Row>
@@ -46,6 +68,10 @@ class App extends Component {
           currentPage={currentPage}
           totalPages={totalPages}
         />
+
+        {showModal &&
+          <Modal imageSrc={imageSrc} closeModal={this.closeModal} message={imageMessage}/>
+        }
       </Grid>
     );
   }

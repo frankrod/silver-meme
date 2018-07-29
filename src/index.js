@@ -9,7 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore();
 
-ReactDOM.hydrate(
+ReactDOM.render(
   <Root store={store} />, 
   document.getElementById('root')
 );
