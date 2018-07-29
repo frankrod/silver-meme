@@ -15,7 +15,7 @@ $ npm run build
 Second run this command to start app:
 
 ```console
-$ npm run start:app
+$ npm run start:server
 ```
 
 To run tests:
