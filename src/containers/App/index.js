@@ -15,6 +15,7 @@ class App extends Component {
     showModal: false,
     imageSrc: '',
     imageMessage: '',
+    imagesDidLoad: [],
   }
 
   componentDidMount() {
@@ -42,9 +43,15 @@ class App extends Component {
     })
   }
 
+  onLoad = (imgId) => {
+    this.setState((prevState) => ({
+      imagesDidLoad: [...prevState.imagesDidLoad, imgId]
+    }))
+  }
+
   render() {
     const { images, totalPages } = this.props;
-    const { currentPage, showModal, imageSrc, imageMessage } = this.state;
+    const { currentPage, showModal, imageSrc, imageMessage, imagesDidLoad } = this.state;
 
     const photos = pathOr([], ['photos', 'photo'], images);
 
@@ -59,6 +66,8 @@ class App extends Component {
         imageSrc={imageSrc}
         closeModal={this.closeModal}
         imageMessage={imageMessage}
+        imagesDidLoad={imagesDidLoad}
+        onLoad={this.onLoad}
       />
     );
   }
