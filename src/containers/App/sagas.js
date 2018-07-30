@@ -4,7 +4,7 @@ import FlickrService from '../../api/flickrService';
 import * as ActionTypes from './constants';
 import * as appActions from './actions';
 
-export function* fetchImages(action: Action<string>): Saga<void> {
+export function* fetchImages(action) {
   try {
     const flickrService = new FlickrService();
     const result = yield call(flickrService.getImages, action.payload.pageNumber);
@@ -14,7 +14,7 @@ export function* fetchImages(action: Action<string>): Saga<void> {
   }
 }
 
-export function* watchGetImages(): Saga<void> {
+export function* watchGetImages() {
   yield takeLatest(ActionTypes.GET_IMAGES, fetchImages);
 }
 

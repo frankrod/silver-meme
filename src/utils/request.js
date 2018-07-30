@@ -12,7 +12,7 @@ function parseJSON(response) {
 
 export const apiURL = 'http://localhost:3000';
 
-export function request(url: string, options?: Object) {
+export function request(url, options) {
   return new Promise((resolve, reject) => {
     fetch(url, options)
       .then(parseJSON)

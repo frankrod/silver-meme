@@ -5,9 +5,9 @@
   "dependencies": {
     "bootstrap": "3",
     "flickrapi": "0.6.0",
-    "flow-bin": "0.77.0",
     "hapi": "17.5.2",
     "inert": "5.1.0",
+    "prop-types": "15.6.2",
     "ramda": "0.25.0",
     "react": "^16.4.1",
     "react-bootstrap": "0.32.1",

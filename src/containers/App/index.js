@@ -9,12 +9,12 @@ import * as appActions from './actions';
 
 import './App.css';
 
-
 class App extends Component {
   state = {
     currentPage: 1,
-    didLoad: false,
     showModal: false,
+    imageSrc: '',
+    imageMessage: '',
   }
 
   componentDidMount() {
@@ -27,11 +27,7 @@ class App extends Component {
     });
   }
 
-  handleLoad = () => {
-    this.setState({ didLoad: true })
-  }
-
-  handleClick = (img, event) => {
+  handleImageClick = (img) => {
     this.setState({
       showModal: true,
       imageSrc: img.url_m,
@@ -56,6 +52,7 @@ class App extends Component {
       <Gallery
         photos={photos}
         handlePageChange={this.handlePageChange}
+        handleImageClick={this.handleImageClick}
         currentPage={currentPage}
         totalPages={totalPages}
         showModal={showModal}
@@ -74,7 +71,7 @@ export const mapStateToProps = ({ app }) => {
   };
 };
 
-export function mapDispatchToProps(dispatch: any): Object {
+export function mapDispatchToProps(dispatch) {
   const actions = bindActionCreators(
     { ...appActions },
     dispatch

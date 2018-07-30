@@ -1,12 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Pagination } from 'react-bootstrap';
-
 
 const createButtons = (currentPage, totalPages, handlePageChange) => {
     let items = [];
     const startPage = Math.max(
       Math.min(
-        currentPage - Math.floor(9 / 2, 10),
+        currentPage - Math.floor(9 / 2),
         totalPages - 9,
       ),
       1
@@ -19,7 +19,7 @@ const createButtons = (currentPage, totalPages, handlePageChange) => {
     return items;
   }
 
-export const MyPagination = ({
+const MyPagination = ({
   handlePageChange,
   currentPage,
   totalPages
@@ -32,3 +32,11 @@ export const MyPagination = ({
     <Pagination.Last onClick={() => handlePageChange(totalPages)}/>
   </Pagination>
 );
+
+MyPagination.propTypes = {
+  handlePageChange: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired
+}
+
+export { MyPagination };

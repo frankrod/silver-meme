@@ -3,10 +3,12 @@ import { Grid, Row, Col, Image } from 'react-bootstrap';
 
 import { MyPagination } from '../Pagination';
 import { Modal } from '../Modal';
+import PropTypes from 'prop-types';
 
-export const Gallery = ({
+const Gallery = ({
   photos,
   handlePageChange,
+  handleImageClick,
   currentPage,
   totalPages,
   showModal,
@@ -20,7 +22,7 @@ export const Gallery = ({
     <Row>
     {photos.map((img) => (
       <Col xs={12} md={3} key={img.id}>
-        <Image onClick={(e) => this.handleClick(img, e)} className="image" src={img.url_m} thumbnail responsive />
+        <Image onClick={() => handleImageClick(img)} className="image" src={img.url_m} thumbnail responsive />
       </Col>
     ))}
     </Row>
@@ -35,3 +37,17 @@ export const Gallery = ({
     }
   </Grid>
 );
+
+Gallery.propTypes = {
+  photos: PropTypes.array.isRequired,
+  handlePageChange: PropTypes.func.isRequired,
+  handleImageClick: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  imageSrc: PropTypes.string.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  imageMessage: PropTypes.string.isRequired,
+}
+
+export { Gallery };
